@@ -832,6 +832,31 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <script>
+    window.onload = function() {
+      let start = null;
+      const duration = 1000; // Duration of the animation in ms
+      const bounceHeight = 100; // Height of the bounce in pixels
+  
+      function bounce(timestamp) {
+        if (!start) start = timestamp;
+        const progress = timestamp - start;
+        const easing = Math.sin((progress / duration) * Math.PI); // Easing function for smooth bounce
+        const scrollY = bounceHeight * easing;
+  
+        window.scrollTo(0, scrollY);
+  
+        if (progress < duration) {
+          requestAnimationFrame(bounce);
+        } else {
+          window.scrollTo(0, 0); // Ensure we end at the top
+        }
+      }
+  
+      requestAnimationFrame(bounce);
+    };
+  </script>
+
 </body>
 
 </html>
